@@ -3,9 +3,12 @@ package com.atharva.com.distributedjobsystem.worker;
 import com.atharva.com.distributedjobsystem.entity.Job;
 import com.atharva.com.distributedjobsystem.entity.JobType;
 import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component
 public class EmailJobHandler implements JobHandler {
+    private static final Logger log = LoggerFactory.getLogger(EmailJobHandler.class);
 
     @Override
     public JobType getType() {
@@ -14,9 +17,7 @@ public class EmailJobHandler implements JobHandler {
 
     @Override
     public void execute(Job job) {
-        System.out.println(
-                "Sending email for job: " + job.getId()
-        );
+        log.info("Sending email for job {}", job.getId());
 
         // Simulate email processing
         try {
@@ -26,8 +27,6 @@ public class EmailJobHandler implements JobHandler {
             throw new RuntimeException("Email processing interrupted", e);
         }
 
-        System.out.println(
-                "Email sent for job: " + job.getId()
-        );
+        log.info("Email sent for job {}", job.getId());
     }
 }

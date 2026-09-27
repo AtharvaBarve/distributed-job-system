@@ -5,6 +5,7 @@ import com.atharva.com.distributedjobsystem.entity.Job;
 import com.atharva.com.distributedjobsystem.service.JobService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.UUID;
 
@@ -20,7 +21,7 @@ public class JobController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Job createJob(@RequestBody CreateJobRequest request) {
+    public Job createJob(@Valid @RequestBody CreateJobRequest request) {
         return jobService.createJob(request);
     }
 

@@ -40,6 +40,9 @@ public class Job {
     @Column(nullable = false)
     private int maxAttempts;
 
+    @Version
+    private long version;
+
     @Column(nullable = false)
     private Instant createdAt;
 

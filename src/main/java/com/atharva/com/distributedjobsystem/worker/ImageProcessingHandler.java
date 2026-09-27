@@ -3,9 +3,12 @@ package com.atharva.com.distributedjobsystem.worker;
 import com.atharva.com.distributedjobsystem.entity.Job;
 import com.atharva.com.distributedjobsystem.entity.JobType;
 import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component
 public class ImageProcessingHandler implements JobHandler {
+    private static final Logger log = LoggerFactory.getLogger(ImageProcessingHandler.class);
 
     @Override
     public JobType getType() {
@@ -14,9 +17,7 @@ public class ImageProcessingHandler implements JobHandler {
 
     @Override
     public void execute(Job job) {
-        System.out.println(
-                "Processing image for job: " + job.getId()
-        );
+        log.info("Processing image for job {}", job.getId());
 
         // Simulate image processing
         try {
@@ -26,8 +27,6 @@ public class ImageProcessingHandler implements JobHandler {
             throw new RuntimeException("Image processing interrupted", e);
         }
 
-        System.out.println(
-                "Image processed for job: " + job.getId()
-        );
+        log.info("Image processed for job {}", job.getId());
     }
 }

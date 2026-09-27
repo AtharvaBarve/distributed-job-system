@@ -3,9 +3,12 @@ package com.atharva.com.distributedjobsystem.worker;
 import com.atharva.com.distributedjobsystem.entity.Job;
 import com.atharva.com.distributedjobsystem.entity.JobType;
 import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Component
 public class ReportGenerationHandler implements JobHandler{
+    private static final Logger log = LoggerFactory.getLogger(ReportGenerationHandler.class);
     @Override
     public JobType getType() {
         return JobType.REPORT_GENERATION;
@@ -13,9 +16,7 @@ public class ReportGenerationHandler implements JobHandler{
 
     @Override
     public void execute(Job job) {
-        System.out.println(
-                "Generating report for job: " + job.getId()
-        );
+        log.info("Generating report for job {}", job.getId());
 
         // Simulate report generation
         try {
@@ -25,8 +26,6 @@ public class ReportGenerationHandler implements JobHandler{
             throw new RuntimeException("Report generation interrupted", e);
         }
 
-        System.out.println(
-                "Report generated for job: " + job.getId()
-        );
+        log.info("Report generated for job {}", job.getId());
     }
 }
